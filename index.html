@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choco Fuel — Chocolate Protein Bar</title>
+  <meta name="description" content="Premium chocolate protein bars crafted for athletes. 25g protein, zero compromise on taste.">
+  <title>Choco Fuel — Premium Chocolate Protein Bars</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body style="opacity: 0;">
 
   <!-- Cursor Glow -->
   <div class="cursor-glow" id="cursorGlow"></div>
@@ -18,14 +19,14 @@
 
   <!-- Navigation -->
   <nav id="navbar">
-    <a href="index.html" class="logo">CHOCO<span>FUEL</span></a>
+    <a href="#" class="logo">CHOCO<span>FUEL</span></a>
     <ul class="nav-links">
       <li><a href="#products">Products</a></li>
       <li><a href="#benefits">Benefits</a></li>
       <li><a href="#ingredients">Ingredients</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="product.html" class="nav-cta">Shop ($5/Bar)</a></li>
+      <li><a href="#cta" class="nav-cta">Shop Now</a></li>
     </ul>
   </nav>
 
@@ -34,19 +35,21 @@
     <div class="hero-bg"></div>
 
     <!-- Floating particles -->
-    <div class="particle" style="width:8px;height:8px;top:15%;left:10%;animation-delay:0s;"></div>
-    <div class="particle" style="width:12px;height:12px;top:25%;left:85%;animation-delay:1s;"></div>
-    <div class="particle" style="width:6px;height:6px;top:60%;left:15%;animation-delay:2s;"></div>
-    <div class="particle" style="width:10px;height:10px;top:70%;left:80%;animation-delay:3s;"></div>
-    <div class="particle" style="width:14px;height:14px;top:40%;left:50%;animation-delay:1.5s;"></div>
-    <div class="particle" style="width:5px;height:5px;top:80%;left:30%;animation-delay:4s;"></div>
-    <div class="particle" style="width:9px;height:9px;top:10%;left:60%;animation-delay:2.5s;"></div>
+    <div class="particle" style="width:10px;height:10px;top:12%;left:8%;animation-delay:0s;"></div>
+    <div class="particle" style="width:14px;height:14px;top:20%;left:88%;animation-delay:1.2s;"></div>
+    <div class="particle" style="width:7px;height:7px;top:55%;left:12%;animation-delay:2.5s;"></div>
+    <div class="particle" style="width:12px;height:12px;top:65%;left:85%;animation-delay:3.8s;"></div>
+    <div class="particle" style="width:16px;height:16px;top:35%;left:50%;animation-delay:1.8s;"></div>
+    <div class="particle" style="width:6px;height:6px;top:75%;left:25%;animation-delay:4.5s;"></div>
+    <div class="particle" style="width:11px;height:11px;top:8%;left:65%;animation-delay:2.8s;"></div>
+    <div class="particle" style="width:9px;height:9px;top:85%;left:70%;animation-delay:3.5s;"></div>
 
     <div class="hero-content">
       <!-- Spinning hero images -->
       <div class="hero-floating-img left">🍫</div>
       <div class="hero-floating-img right">🥜</div>
-      <div class="hero-badge">⚡ Premium Protein Bars</div>
+
+      <div class="hero-badge">⚡ PREMIUM PROTEIN BARS</div>
       <h1>
         FUEL YOUR<br>
         <span class="gold">POWER</span> WITH<br>
@@ -54,16 +57,16 @@
       </h1>
       <p class="hero-sub">
         Crafted for athletes & dreamers — 25g protein, zero compromise on taste.
-        Pure cocoa energy in every bite. Just $5 per bar!
+        Pure cocoa energy in every bite.
       </p>
       <div class="hero-buttons">
-        <a href="product.html" class="btn-primary" style="text-decoration:none;">Buy Nutritious Bar — $5</a>
-        <a href="#products" class="btn-secondary" style="text-decoration:none;">Explore Flavors</a>
+        <button class="btn-primary">Explore Flavors</button>
+        <button class="btn-secondary">Watch Story ▶</button>
       </div>
     </div>
 
     <div class="scroll-indicator">
-      <span>Scroll</span>
+      <span>SCROLL</span>
       <div class="scroll-line"></div>
     </div>
   </section>
@@ -77,7 +80,6 @@
       <span class="marquee-item">ENERGY BOOST <span class="dot"></span></span>
       <span class="marquee-item">GUILT-FREE <span class="dot"></span></span>
       <span class="marquee-item">ATHLETE APPROVED <span class="dot"></span></span>
-      <span class="marquee-item">ONLY $5 PER BAR <span class="dot"></span></span>
       <!-- duplicate for seamless loop -->
       <span class="marquee-item">HIGH PROTEIN <span class="dot"></span></span>
       <span class="marquee-item">ZERO ADDED SUGAR <span class="dot"></span></span>
@@ -85,7 +87,6 @@
       <span class="marquee-item">ENERGY BOOST <span class="dot"></span></span>
       <span class="marquee-item">GUILT-FREE <span class="dot"></span></span>
       <span class="marquee-item">ATHLETE APPROVED <span class="dot"></span></span>
-      <span class="marquee-item">ONLY $5 PER BAR <span class="dot"></span></span>
     </div>
   </div>
 
@@ -108,39 +109,43 @@
       <div class="orbit-dot">🌾</div>
       <div class="orbit-dot">⚡</div>
     </div>
+
     <div class="reveal">
-      <div class="section-label">Our Collection</div>
+      <div class="section-label">OUR COLLECTION</div>
       <div class="section-title">Choose Your Fuel</div>
       <p class="section-desc">Three bold flavors, one mission — to make your protein taste as good as your results feel.</p>
     </div>
+
     <div class="product-grid">
-      <div class="product-card reveal" style="transition-delay: 0.1s;" onclick="window.location.href='product.html'">
+      <div class="product-card reveal" style="transition-delay: 0.15s;">
         <div class="card-icon choco">🍫</div>
-        <h3>Classic Cocoa</h3>
-        <div class="flavor">Rich Dark Chocolate — $5.00</div>
-        <p>Deep, velvety cocoa blended with whey isolate. The OG that started it all.</p>
+        <h3>CLASSIC COCOA</h3>
+        <div class="flavor">Rich Dark Chocolate</div>
+        <p>Deep, velvety cocoa blended with whey isolate. The OG that started it all — pure chocolate perfection.</p>
         <div class="card-stats">
           <div class="stat"><div class="stat-val">25g</div><div class="stat-label">Protein</div></div>
           <div class="stat"><div class="stat-val">180</div><div class="stat-label">Calories</div></div>
           <div class="stat"><div class="stat-val">2g</div><div class="stat-label">Sugar</div></div>
         </div>
       </div>
-      <div class="product-card reveal" style="transition-delay: 0.25s;" onclick="window.location.href='product.html'">
+
+      <div class="product-card reveal" style="transition-delay: 0.3s;">
         <div class="card-icon peanut">🥜</div>
-        <h3>Peanut Crunch</h3>
-        <div class="flavor">Chocolate Peanut Butter — $5.00</div>
-        <p>Crushed peanuts meet cocoa in a crunchy, creamy, protein-packed powerhouse.</p>
+        <h3>PEANUT CRUNCH</h3>
+        <div class="flavor">Chocolate Peanut Butter</div>
+        <p>Crushed peanuts meet cocoa in a crunchy, creamy, protein-packed powerhouse that satisfies every craving.</p>
         <div class="card-stats">
           <div class="stat"><div class="stat-val">28g</div><div class="stat-label">Protein</div></div>
           <div class="stat"><div class="stat-val">210</div><div class="stat-label">Calories</div></div>
           <div class="stat"><div class="stat-val">3g</div><div class="stat-label">Sugar</div></div>
         </div>
       </div>
-      <div class="product-card reveal" style="transition-delay: 0.4s;" onclick="window.location.href='product.html'">
+
+      <div class="product-card reveal" style="transition-delay: 0.45s;">
         <div class="card-icon dark">🌑</div>
-        <h3>Midnight Dark</h3>
-        <div class="flavor">85% Dark Chocolate — $5.00</div>
-        <p>For the purists. Intense dark chocolate with espresso undertones and zero guilt.</p>
+        <h3>MIDNIGHT DARK</h3>
+        <div class="flavor">85% Dark Chocolate</div>
+        <p>For the purists. Intense dark chocolate with espresso undertones and zero guilt. Refined taste, maximum impact.</p>
         <div class="card-stats">
           <div class="stat"><div class="stat-val">22g</div><div class="stat-label">Protein</div></div>
           <div class="stat"><div class="stat-val">165</div><div class="stat-label">Calories</div></div>
@@ -154,43 +159,44 @@
   <section class="benefits-section section-pad" id="benefits">
     <div class="benefits-grid">
       <div class="reveal-left">
-        <div class="section-label">Why Choco Fuel</div>
+        <div class="section-label">WHY CHOCO FUEL</div>
         <div class="section-title">Engineered for<br><span style="color:#d4a03c;">Performance</span></div>
-        <p class="section-desc" style="margin-bottom: 3rem;">
+        <p class="section-desc" style="margin-bottom: 3.5rem;">
           Every bar is a precision blend of macros, flavor, and clean energy.
-          No fillers. No nonsense. Just fuel.
+          No fillers. No nonsense. Just fuel that works.
         </p>
         <div class="benefit-list">
           <div class="benefit-item">
             <div class="benefit-icon">⚡</div>
             <div>
               <h4>Sustained Energy</h4>
-              <p>Complex carbs + MCTs deliver steady power without the crash.</p>
+              <p>Complex carbs + MCTs deliver steady power without the crash. Peak performance from start to finish.</p>
             </div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">💪</div>
             <div>
               <h4>Muscle Recovery</h4>
-              <p>Fast-absorbing whey isolate kickstarts repair within minutes post-workout.</p>
+              <p>Fast-absorbing whey isolate kickstarts repair within minutes post-workout. Build stronger, recover faster.</p>
             </div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">🧬</div>
             <div>
               <h4>Clean Ingredients</h4>
-              <p>No artificial sweeteners, colors, or preservatives. Just real food.</p>
+              <p>No artificial sweeteners, colors, or preservatives. Just real food your body recognizes and uses.</p>
             </div>
           </div>
           <div class="benefit-item">
             <div class="benefit-icon">🎯</div>
             <div>
               <h4>Macro Balanced</h4>
-              <p>Optimized protein-to-carb ratio designed by sports nutritionists.</p>
+              <p>Optimized protein-to-carb ratio designed by sports nutritionists. Science-backed, taste-approved.</p>
             </div>
           </div>
         </div>
       </div>
+
       <div class="nutrition-visual reveal-right">
         <div class="nutrition-ring">
           <svg class="ring-svg" viewBox="0 0 300 300">
@@ -199,20 +205,20 @@
           </svg>
           <div class="ring-center">
             <div class="ring-value" id="proteinCounter">0g</div>
-            <div class="ring-label">Protein per bar</div>
+            <div class="ring-label">PROTEIN PER BAR</div>
           </div>
         </div>
         <div class="ring-sub-stats">
           <div class="stat">
-            <div class="stat-val" style="font-size:1.3rem;">5g</div>
+            <div class="stat-val" style="font-size:1.4rem;">5g</div>
             <div class="stat-label">BCAAs</div>
           </div>
           <div class="stat">
-            <div class="stat-val" style="font-size:1.3rem;">0g</div>
+            <div class="stat-val" style="font-size:1.4rem;">0g</div>
             <div class="stat-label">Trans Fat</div>
           </div>
           <div class="stat">
-            <div class="stat-val" style="font-size:1.3rem;">8g</div>
+            <div class="stat-val" style="font-size:1.4rem;">8g</div>
             <div class="stat-label">Fiber</div>
           </div>
         </div>
@@ -223,47 +229,47 @@
   <!-- Ingredients Section -->
   <section class="ingredients-section section-pad" id="ingredients">
     <div class="reveal">
-      <div class="section-label">Premium Ingredients</div>
+      <div class="section-label">PREMIUM INGREDIENTS</div>
       <div class="section-title">What's Inside <span style="color:#d4a03c;">Matters</span></div>
-      <p class="section-desc">Sourced from the world's finest farms and suppliers.</p>
+      <p class="section-desc">Sourced from the world's finest farms and suppliers. Every ingredient tells a story of quality.</p>
     </div>
     <div class="horiz-scroll-wrapper">
       <div class="ingredient-track">
         <div class="ingredient-card reveal-scale" style="transition-delay:0.1s">
           <span class="ing-emoji">🌿</span>
-          <h4>Organic Cocoa</h4>
-          <p>Single-origin Ecuadorian cacao, fair-trade certified and roasted to perfection.</p>
+          <h4>ORGANIC COCOA</h4>
+          <p>Single-origin Ecuadorian cacao, fair-trade certified and roasted to perfection for rich, authentic chocolate flavor.</p>
         </div>
         <div class="ingredient-card reveal-scale" style="transition-delay:0.2s">
           <span class="ing-emoji">🥛</span>
-          <h4>Whey Isolate</h4>
-          <p>Grass-fed, cold-processed whey protein isolate with 90%+ purity.</p>
+          <h4>WHEY ISOLATE</h4>
+          <p>Grass-fed, cold-processed whey protein isolate with 90%+ purity. Maximum bioavailability, minimum processing.</p>
         </div>
         <div class="ingredient-card reveal-scale" style="transition-delay:0.3s">
           <span class="ing-emoji">🥥</span>
-          <h4>Coconut MCTs</h4>
-          <p>Medium-chain triglycerides for rapid energy conversion and mental clarity.</p>
+          <h4>COCONUT MCTs</h4>
+          <p>Medium-chain triglycerides for rapid energy conversion and mental clarity. Sustained power without the jitters.</p>
         </div>
         <div class="ingredient-card reveal-scale" style="transition-delay:0.4s">
           <span class="ing-emoji">🍯</span>
-          <h4>Raw Honey</h4>
-          <p>Natural sweetener with enzymes and antioxidants. Unprocessed, unfiltered.</p>
+          <h4>RAW HONEY</h4>
+          <p>Natural sweetener with enzymes and antioxidants. Unprocessed, unfiltered, straight from the hive.</p>
         </div>
         <div class="ingredient-card reveal-scale" style="transition-delay:0.5s">
           <span class="ing-emoji">🌰</span>
-          <h4>Almond Butter</h4>
-          <p>Stone-ground almonds for creamy texture and healthy monounsaturated fats.</p>
+          <h4>ALMOND BUTTER</h4>
+          <p>Stone-ground almonds for creamy texture and healthy monounsaturated fats. Heart-healthy, taste-approved.</p>
         </div>
         <div class="ingredient-card reveal-scale" style="transition-delay:0.6s">
           <span class="ing-emoji">🌾</span>
-          <h4>Oat Fiber</h4>
-          <p>Soluble fiber for sustained energy release and gut health support.</p>
+          <h4>OAT FIBER</h4>
+          <p>Soluble fiber for sustained energy release and gut health support. The foundation of lasting endurance.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Parallax Image Strip (pop on scroll) -->
+  <!-- Parallax Image Strip -->
   <div class="parallax-strip">
     <div class="parallax-img pop-item">🍫</div>
     <div class="parallax-img pop-item">🥛</div>
@@ -281,15 +287,15 @@
         <div class="stat-number"><span class="counter" data-target="2500000">0</span><span class="suffix">+</span></div>
         <div class="stat-desc">Bars Sold</div>
       </div>
-      <div class="stat-block reveal" style="transition-delay:0.2s">
+      <div class="stat-block reveal" style="transition-delay:0.25s">
         <div class="stat-number"><span class="counter" data-target="98">0</span><span class="suffix">%</span></div>
         <div class="stat-desc">Customer Satisfaction</div>
       </div>
-      <div class="stat-block reveal" style="transition-delay:0.3s">
+      <div class="stat-block reveal" style="transition-delay:0.4s">
         <div class="stat-number"><span class="counter" data-target="45">0</span><span class="suffix">+</span></div>
         <div class="stat-desc">Countries</div>
       </div>
-      <div class="stat-block reveal" style="transition-delay:0.4s">
+      <div class="stat-block reveal" style="transition-delay:0.55s">
         <div class="stat-number"><span class="counter" data-target="12">0</span></div>
         <div class="stat-desc">Awards Won</div>
       </div>
@@ -299,15 +305,15 @@
   <!-- Testimonials -->
   <section class="testimonials-section section-pad" id="testimonials">
     <div class="reveal">
-      <div class="section-label" style="text-align:center;">What People Say</div>
+      <div class="section-label" style="text-align:center;">WHAT PEOPLE SAY</div>
       <div class="section-title" style="text-align:center;">Loved by <span style="color:#d4a03c;">Athletes</span></div>
     </div>
     <div class="testimonial-carousel">
-      <div class="testimonial-card reveal" style="transition-delay:0.1s">
+      <div class="testimonial-card reveal" style="transition-delay:0.15s">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">
           "I've tried every protein bar on the market. Choco Fuel is the only one that actually
-          tastes like a real chocolate bar while delivering serious macros. Game changer."
+          tastes like a real chocolate bar while delivering serious macros. Absolute game changer for my training."
         </p>
         <div class="testimonial-author">
           <div class="author-avatar">A</div>
@@ -317,11 +323,12 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card reveal" style="transition-delay:0.25s">
+
+      <div class="testimonial-card reveal" style="transition-delay:0.3s">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">
-          "As a dietitian, I'm picky about what I recommend. Choco Fuel's clean label
-          and macro profile make it my go-to recommendation for active clients."
+          "As a dietitian, I'm extremely picky about what I recommend. Choco Fuel's clean label
+          and macro profile make it my go-to recommendation for active clients who refuse to compromise."
         </p>
         <div class="testimonial-author">
           <div class="author-avatar">S</div>
@@ -331,11 +338,12 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card reveal" style="transition-delay:0.4s">
+
+      <div class="testimonial-card reveal" style="transition-delay:0.45s">
         <div class="stars">★★★★★</div>
         <p class="testimonial-text">
           "Midnight Dark is perfection. I eat one before every marathon training run.
-          The sustained energy is real — no crash, no bloating, just pure fuel."
+          The sustained energy is real — no crash, no bloating, just pure fuel that keeps me going."
         </p>
         <div class="testimonial-author">
           <div class="author-avatar">J</div>
@@ -348,12 +356,12 @@
     </div>
   </section>
 
-  <!-- Image Gallery (Pop-up on scroll) -->
+  <!-- Image Gallery -->
   <section class="gallery-section section-pad" id="gallery">
     <div class="reveal" style="text-align: center;">
-      <div class="section-label">Gallery</div>
+      <div class="section-label">GALLERY</div>
       <div class="section-title">The <span style="color:#d4a03c;">Choco Fuel</span> Experience</div>
-      <p class="section-desc" style="margin: 0 auto;">From gym to trail to office — fuel everywhere.</p>
+      <p class="section-desc" style="margin: 0 auto;">From gym to trail to office — fuel everywhere, fuel always.</p>
     </div>
     <div class="gallery-grid">
       <div class="gallery-item pop-item">
@@ -404,55 +412,58 @@
   <!-- CTA Section -->
   <section class="cta-section section-pad" id="cta">
     <div class="reveal">
-      <div class="section-label">Ready to Fuel Up?</div>
+      <div class="section-label">READY TO FUEL UP?</div>
       <div class="section-title">Your Next PR Starts<br>With <span style="color:#d4a03c;">Every Bite</span></div>
       <p class="section-desc">
         Join 2.5 million athletes who made the switch.
-        Free shipping on your first order.
+        Free shipping on your first order + 15% off with code FUEL15.
       </p>
-      <a href="product.html" class="cta-big-btn">
-        Order Now for $5 <span class="arrow">→</span>
-      </a>
+      <button class="cta-big-btn" id="mainCTABtn">
+        Shop All Flavors <span class="arrow">→</span>
+      </button>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer id="footer">
+  <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="logo">CHOCO<span>FUEL</span></a>
-        <p>Premium chocolate protein bars crafted for those who refuse to compromise on taste or performance.</p>
+        <a href="#" class="logo">CHOCO<span>FUEL</span></a>
+        <p>Premium chocolate protein bars crafted for those who refuse to compromise on taste or performance. Fuel your power.</p>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h4>PRODUCTS</h4>
         <ul>
-          <li><a href="product.html">Nutritious Bar ($5)</a></li>
-          <li><a href="product.html">Classic Cocoa</a></li>
-          <li><a href="product.html">Peanut Crunch</a></li>
-          <li><a href="product.html">Midnight Dark</a></li>
+          <li><a href="#">Classic Cocoa</a></li>
+          <li><a href="#">Peanut Crunch</a></li>
+          <li><a href="#">Midnight Dark</a></li>
+          <li><a href="#">Variety Pack</a></li>
+          <li><a href="#">Subscription</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>COMPANY</h4>
         <ul>
           <li><a href="#">Our Story</a></li>
-          <li><a href="#ingredients">Ingredients</a></li>
+          <li><a href="#">Ingredients</a></li>
           <li><a href="#">Sustainability</a></li>
           <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Support</h4>
+        <h4>SUPPORT</h4>
         <ul>
           <li><a href="#">FAQ</a></li>
           <li><a href="#">Shipping</a></li>
           <li><a href="#">Returns</a></li>
           <li><a href="#">Contact</a></li>
+          <li><a href="#">Wholesale</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 ChocoFuel. All rights reserved.</p>
+      <p>&copy; 2026 ChocoFuel. All rights reserved. Made with 🍫 and 💪</p>
       <div class="social-links">
         <a href="#" title="Instagram">IG</a>
         <a href="#" title="Twitter">X</a>
