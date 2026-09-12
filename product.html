@@ -3,12 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nutritious Bar — Buy Now | Choco Fuel</title>
+  <meta name="description" content="Premium Nutritious Bar - 25g protein, zero added sugar. Crafted for peak performance.">
+  <title>Nutritious Bar — Premium Protein | Choco Fuel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Product Page Specific Styles */
+    .product-detail-section {
+      padding: 8rem 6rem !important;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .product-image-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 500px;
+      background: linear-gradient(135deg, rgba(60,35,18,0.8), rgba(30,18,10,0.95));
+      border-radius: 32px;
+      border: 1px solid rgba(212,160,60,0.15);
+      padding: 3rem;
+      box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+
+    .product-main-emoji {
+      font-size: 12rem;
+      animation: productFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 20px 60px rgba(212,160,60,0.3));
+      position: relative;
+      z-index: 1;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes productFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-30px) rotate(90deg); }
+      50% { transform: translateY(0) rotate(180deg); }
+      75% { transform: translateY(-15px) rotate(270deg); }
+    }
+
+    .product-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .product-info-panel h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4rem);
+      font-weight: 900;
+      color: #f5f0e8;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .product-price-tag {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: #d4a03c;
+      font-weight: 700;
+      text-shadow: 0 0 40px rgba(212,160,60,0.3);
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+    }
+
+    .product-price-tag span {
+      font-size: 1rem;
+      color: #c4b8a8;
+      text-shadow: none;
+    }
+
+    .flavor-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .flavor-selector label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #d4a03c;
+      text-shadow: 0 0 20px rgba(212,160,60,0.15);
+    }
+
+    .flavor-options {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .flavor-btn {
+      padding: 1rem 1.8rem;
+      border: 2px solid rgba(212,160,60,0.3);
+      background: transparent;
+      color: #c4b8a8;
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flavor-btn:hover {
+      border-color: #d4a03c;
+      color: #e8c268;
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(212,160,60,0.2);
+    }
+
+    .flavor-btn.active {
+      background: linear-gradient(135deg, rgba(212,160,60,0.25), rgba(232,194,104,0.15));
+      border-color: #d4a03c;
+      color: #e8c268;
+      box-shadow: 0 10px 30px rgba(212,160,60,0.3);
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(212,160,60,0.05);
+      border: 1px solid rgba(212,160,60,0.12);
+      border-radius: 50px;
+      padding: 0.8rem 1.2rem;
+      width: fit-content;
+    }
+
+    .qty-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: linear-gradient(135deg, rgba(212,160,60,0.15), rgba(212,160,60,0.05));
+      color: #d4a03c;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: linear-gradient(135deg, rgba(212,160,60,0.3), rgba(212,160,60,0.15));
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(212,160,60,0.2);
+    }
+
+    .qty-input {
+      width: 50px;
+      border: none;
+      background: transparent;
+      color: #e8c268;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .total-price-display {
+      font-size: 1.15rem;
+      color: #c4b8a8;
+      background: rgba(212,160,60,0.05);
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(212,160,60,0.12);
+      font-weight: 500;
+    }
+
+    .total-price-display strong {
+      color: #e8c268;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      text-shadow: 0 0 20px rgba(232,194,104,0.3);
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .product-actions .btn-primary {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .product-actions .btn-secondary {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .product-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(212,160,60,0.15);
+    }
+
+    .product-stat {
+      text-align: center;
+    }
+
+    .product-stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: #d4a03c;
+      text-shadow: 0 0 15px rgba(212,160,60,0.3);
+    }
+
+    .product-stat-label {
+      font-size: 0.7rem;
+      color: #8a7d6e;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    @media (max-width: 900px) {
+      .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+
+      .product-image-container {
+        min-height: 350px;
+      }
+
+      .product-main-emoji {
+        font-size: 8rem;
+      }
+
+      .product-detail-section {
+        padding: 5rem 3rem !important;
+      }
+
+      .product-info-panel h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .product-detail-section {
+        padding: 3rem 1.5rem !important;
+      }
+
+      .product-image-container {
+        min-height: 300px;
+        padding: 2rem;
+      }
+
+      .product-main-emoji {
+        font-size: 6rem;
+      }
+
+      .product-price-tag {
+        font-size: 2rem;
+      }
+
+      .product-actions {
+        flex-direction: column;
+      }
+
+      .flavor-options {
+        flex-direction: column;
+      }
+
+      .flavor-btn {
+        width: 100%;
+      }
+
+      .product-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
-<body>
+<body style="opacity: 0;">
 
   <!-- Cursor Glow -->
   <div class="cursor-glow" id="cursorGlow"></div>
@@ -24,42 +326,54 @@
       <li><a href="index.html#benefits">Benefits</a></li>
       <li><a href="index.html#ingredients">Ingredients</a></li>
       <li><a href="index.html#testimonials">Reviews</a></li>
-      <li><a href="product.html" class="nav-cta">Cart (<span id="cartCount">0</span>)</a></li>
+      <li><a href="product.html" class="nav-cta">Cart</a></li>
     </ul>
   </nav>
 
   <!-- Product Detail Section -->
-  <section class="product-detail-section section-pad">
+  <section class="product-detail-section">
     <div class="product-detail-grid">
 
       <!-- Product Visual Showcase -->
       <div class="product-image-container">
         <div class="product-main-emoji" id="productEmoji">🍫</div>
-        <div class="card-stats" style="width: 100%; border-top: 1px solid rgba(212,160,60,0.2); margin-top: 2rem;">
-          <div class="stat"><div class="stat-val">25g</div><div class="stat-label">Protein</div></div>
-          <div class="stat"><div class="stat-val">180</div><div class="stat-label">Calories</div></div>
-          <div class="stat"><div class="stat-val">0g</div><div class="stat-label">Added Sugar</div></div>
-          <div class="stat"><div class="stat-val">100%</div><div class="stat-label">Organic</div></div>
+        <div class="product-stats">
+          <div class="product-stat">
+            <div class="product-stat-val">25g</div>
+            <div class="product-stat-label">Protein</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-val">180</div>
+            <div class="product-stat-label">Calories</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-val">0g</div>
+            <div class="product-stat-label">Added Sugar</div>
+          </div>
+          <div class="product-stat">
+            <div class="product-stat-val">100%</div>
+            <div class="product-stat-label">Organic</div>
+          </div>
         </div>
       </div>
 
       <!-- Product Order Controls -->
       <div class="product-info-panel">
-        <div class="section-label">⚡ Premium Nutrition</div>
+        <div class="section-label">⚡ PREMIUM NUTRITION</div>
         <h1>Nutritious Bar</h1>
 
         <div class="product-price-tag">
           $5.00 <span>/ per bar</span>
         </div>
 
-        <p class="section-desc" style="margin-bottom: 2rem;">
+        <p class="section-desc" style="margin-bottom: 2.5rem; font-size: 1.05rem;">
           The ultimate blend of high-grade whey isolate, organic cocoa, and essential micronutrients.
-          Formulated to sustain high energy and fuel rapid muscle recovery.
+          Formulated to sustain high energy and fuel rapid muscle recovery. Maximum performance, zero compromise.
         </p>
 
         <!-- Flavor Picker -->
         <div class="flavor-selector">
-          <label>Select Flavor:</label>
+          <label>SELECT FLAVOR:</label>
           <div class="flavor-options">
             <button class="flavor-btn active" data-emoji="🍫">Classic Cocoa</button>
             <button class="flavor-btn" data-emoji="🥜">Peanut Crunch</button>
@@ -68,11 +382,13 @@
         </div>
 
         <!-- Quantity & Pricing -->
-        <label style="display:block; font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; color:#b0a898; margin-bottom:0.8rem;">Quantity:</label>
-        <div class="quantity-control">
-          <button class="qty-btn" id="qtyMinus">-</button>
-          <input type="number" id="productQty" class="qty-input" value="1" min="1" max="99">
-          <button class="qty-btn" id="qtyPlus">+</button>
+        <div>
+          <label style="display:block; font-size:0.75rem; letter-spacing:3px; text-transform:uppercase; color:#d4a03c; margin-bottom:1rem; font-weight: 800; text-shadow: 0 0 15px rgba(212,160,60,0.2);">Quantity:</label>
+          <div class="quantity-control">
+            <button class="qty-btn" id="qtyMinus">−</button>
+            <input type="number" id="productQty" class="qty-input" value="1" min="1" max="99">
+            <button class="qty-btn" id="qtyPlus">+</button>
+          </div>
         </div>
 
         <!-- Total Price -->
@@ -81,9 +397,9 @@
         </div>
 
         <!-- Action Buttons -->
-        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-          <button class="btn-primary" id="addToCartBtn" onclick="alert('Added to cart! Total: ' + document.getElementById('totalPrice').innerText)">Add to Cart</button>
-          <button class="btn-secondary" onclick="alert('Proceeding to Checkout with total: ' + document.getElementById('totalPrice').innerText)">Buy Now</button>
+        <div class="product-actions">
+          <button class="btn-primary" id="addToCartBtn">Add to Cart</button>
+          <a href="https://forms.gle/TWu5Fa8YzBry24Z68" class="btn-secondary" style="text-decoration: none; display: flex; align-items: center; justify-content: center;">Buy Now</a>
         </div>
       </div>
 
@@ -95,10 +411,10 @@
     <div class="footer-grid">
       <div class="footer-brand">
         <a href="index.html" class="logo">CHOCO<span>FUEL</span></a>
-        <p>Premium chocolate protein bars crafted for those who refuse to compromise on taste or performance.</p>
+        <p>Premium chocolate protein bars crafted for those who refuse to compromise on taste or performance. Fuel your power.</p>
       </div>
       <div class="footer-col">
-        <h4>Products</h4>
+        <h4>PRODUCTS</h4>
         <ul>
           <li><a href="product.html">Nutritious Bar ($5)</a></li>
           <li><a href="product.html">Classic Cocoa</a></li>
@@ -107,16 +423,16 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Company</h4>
+        <h4>COMPANY</h4>
         <ul>
-          <li><a href="index.html#story">Our Story</a></li>
+          <li><a href="index.html">Our Story</a></li>
           <li><a href="index.html#ingredients">Ingredients</a></li>
           <li><a href="#">Sustainability</a></li>
           <li><a href="#">Careers</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Support</h4>
+        <h4>SUPPORT</h4>
         <ul>
           <li><a href="#">FAQ</a></li>
           <li><a href="#">Shipping</a></li>
@@ -126,7 +442,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 ChocoFuel. All rights reserved.</p>
+      <p>&copy; 2026 ChocoFuel. All rights reserved. Made with 🍫 and 💪</p>
       <div class="social-links">
         <a href="#" title="Instagram">IG</a>
         <a href="#" title="Twitter">X</a>
