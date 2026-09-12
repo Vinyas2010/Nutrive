@@ -707,19 +707,6 @@ section { position: relative; }
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 900px) {
-  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-floating-img { font-size: 5rem; opacity: 0.2; }
-  .rotating-ring { display: none; }
-  .floating-product-img { width: 120px; height: 120px; font-size: 3rem; }
-  .parallax-strip { gap: 2rem; height: 200px; }
-  .parallax-img { width: 80px; height: 80px; font-size: 3rem; }
-}
-@media (max-width: 600px) {
-  .gallery-grid { grid-template-columns: 1fr; }
-  .parallax-strip { gap: 1rem; flex-wrap: wrap; height: auto; padding: 2rem; }
-}
-
 /* ── Stats Counter ────────────────────────── */
 .stats-section {
   background: linear-gradient(135deg, #1a0f08, #0a0604);
@@ -819,6 +806,7 @@ section { position: relative; }
   cursor: pointer;
   transition: all 0.4s;
   position: relative; overflow: hidden;
+  text-decoration: none;
 }
 .cta-big-btn::before {
   content: '';
@@ -892,6 +880,124 @@ footer {
   transform: translateY(-3px);
 }
 
+/* ── Product Page Styles ─────────────────── */
+.product-detail-section {
+  padding-top: 8rem;
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.product-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.product-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(212,160,60,0.1) 0%, transparent 70%);
+  padding: 3rem;
+  border-radius: 24px;
+  border: 1px solid rgba(212,160,60,0.1);
+  position: relative;
+}
+.product-main-emoji {
+  font-size: 10rem;
+  animation: heroSpin 20s linear infinite;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+}
+.product-info-panel h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  color: #f5f0e8;
+}
+.product-price-tag {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem;
+  color: #d4a03c;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.product-price-tag span {
+  font-size: 1rem;
+  color: #776a5e;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+.flavor-selector {
+  margin-bottom: 2rem;
+}
+.flavor-selector label {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b0a898;
+  margin-bottom: 0.8rem;
+}
+.flavor-options {
+  display: flex;
+  gap: 1rem;
+}
+.flavor-btn {
+  background: rgba(20,12,6,0.8);
+  border: 1px solid rgba(212,160,60,0.2);
+  color: #f5f0e8;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.flavor-btn.active, .flavor-btn:hover {
+  border-color: #d4a03c;
+  background: rgba(212,160,60,0.1);
+}
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.qty-btn {
+  background: rgba(212,160,60,0.2);
+  border: none;
+  color: #d4a03c;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.qty-btn:hover {
+  background: rgba(212,160,60,0.4);
+}
+.qty-input {
+  background: transparent;
+  border: 1px solid rgba(212,160,60,0.3);
+  color: #f5f0e8;
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+.total-price-display {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #b0a898;
+}
+.total-price-display strong {
+  color: #d4a03c;
+}
+
 /* ── Responsive ───────────────────────────── */
 @media (max-width: 900px) {
   nav { padding: 1rem 2rem; }
@@ -901,9 +1007,12 @@ footer {
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .testimonial-carousel { grid-template-columns: 1fr; }
+  .product-detail-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .hero h1 { font-size: 3rem; }
   .stats-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
+  .product-image-container { padding: 1.5rem; }
+  .product-main-emoji { font-size: 6rem; }
 }

@@ -1,24 +1,30 @@
 // ── Cursor Glow ──────────────────────────────
 const glow = document.getElementById('cursorGlow');
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
+if (glow) {
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+}
 
 // ── Scroll Progress Bar ──────────────────────
 const progressBar = document.getElementById('scrollProgress');
-window.addEventListener('scroll', () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = scrollTop / docHeight;
-  progressBar.style.transform = `scaleX(${progress})`;
-});
+if (progressBar) {
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollTop / docHeight;
+    progressBar.style.transform = `scaleX(${progress})`;
+  });
+}
 
 // ── Navbar scroll state ──────────────────────
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 80);
-});
+if (navbar) {
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 80);
+  });
+}
 
 // ── Intersection Observer (reveal animations) ─
 const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
@@ -36,24 +42,27 @@ const ringFill = document.getElementById('ringFill');
 const proteinCounter = document.getElementById('proteinCounter');
 let ringAnimated = false;
 
-const ringObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !ringAnimated) {
-      ringAnimated = true;
-      ringFill.classList.add('animated');
-      // Animate counter 0 → 25
-      let current = 0;
-      const target = 25;
-      const step = () => {
-        current += 1;
-        proteinCounter.textContent = current + 'g';
-        if (current < target) requestAnimationFrame(step);
-      };
-      setTimeout(step, 300);
-    }
-  });
-}, { threshold: 0.4 });
-ringObserver.observe(document.querySelector('.nutrition-ring'));
+if (ringFill && proteinCounter) {
+  const ringObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !ringAnimated) {
+        ringAnimated = true;
+        ringFill.classList.add('animated');
+        // Animate counter 0 → 25
+        let current = 0;
+        const target = 25;
+        const step = () => {
+          current += 1;
+          proteinCounter.textContent = current + 'g';
+          if (current < target) requestAnimationFrame(step);
+        };
+        setTimeout(step, 300);
+      }
+    });
+  }, { threshold: 0.4 });
+  const ringTarget = document.querySelector('.nutrition-ring');
+  if (ringTarget) ringObserver.observe(ringTarget);
+}
 
 // ── Counter Animation ────────────────────────
 const counters = document.querySelectorAll('.counter');
@@ -138,8 +147,61 @@ document.querySelectorAll('.product-card').forEach(card => {
 // ── Smooth anchor scrolling ──────────────────
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(anchor.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
+    const href = anchor.getAttribute('href');
+    if (href.length > 1) {
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    }
   });
 });
+
+// ── Product Page Logic ───────────────────────
+const qtyInput = document.getElementById('productQty');
+const totalPriceEl = document.getElementById('totalPrice');
+const mainEmoji = document.getElementById('productEmoji');
+
+if (qtyInput && totalPriceEl) {
+  const pricePerBar = 5; // $5 per bar
+
+  function updatePrice() {
+    let qty = parseInt(qtyInput.value) || 1;
+    if (qty < 1) qty = 1;
+    qtyInput.value = qty;
+    totalPriceEl.textContent = `$${(qty * pricePerBar).toFixed(2)}`;
+  }
+
+  const minusBtn = document.getElementById('qtyMinus');
+  const plusBtn = document.getElementById('qtyPlus');
+
+  if (minusBtn) {
+    minusBtn.addEventListener('click', () => {
+      let qty = parseInt(qtyInput.value) || 1;
+      if (qty > 1) {
+        qtyInput.value = qty - 1;
+        updatePrice();
+      }
+    });
+  }
+
+  if (plusBtn) {
+    plusBtn.addEventListener('click', () => {
+      let qty = parseInt(qtyInput.value) || 1;
+      qtyInput.value = qty + 1;
+      updatePrice();
+    });
+  }
+
+  qtyInput.addEventListener('input', updatePrice);
+
+  // Flavor selector logic
+  document.querySelectorAll('.flavor-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.flavor-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (mainEmoji) {
+        mainEmoji.textContent = btn.dataset.emoji || '🍫';
+      }
+    });
+  });
+}
