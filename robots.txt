@@ -1,0 +1,12 @@
+# Allow all search engine bots to crawl the store
+User-agent: *
+Allow: /
+
+# Block private or empty system folders you don't want showing up in search results
+Disallow: /assets/
+Disallow: /private/
+Disallow: /admin/
+
+# Explicitly declare your live sitemap location
+Sitemap: https://xn--nutriv-gva.store
+Sitemap: https://xn--nutriv-gva.store
