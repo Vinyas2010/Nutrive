@@ -1,48 +1,92 @@
 /* ─────────────────────────────────────────
-   NUTRIV È  |  script.js
-   - Scroll arrow click
-   - Intersection Observer (date slide-in)
+   NUTRIVÈ  |  script.js
+   - Scroll arrow
+   - Scroll-driven two-phase date animation
    - Canvas particle system
 ───────────────────────────────────────── */
 
 // ── SCROLL ARROW ──
 document.getElementById('scrollArrow').addEventListener('click', () => {
-  document.getElementById('ingredients').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('ingredients-scroll-container')
+    .scrollIntoView({ behavior: 'smooth' });
 });
 
-// ── INTERSECTION OBSERVER: Date slide-in animation ──
-const dateVisual = document.getElementById('dateVisual');
+// ── SCROLL-DRIVEN TWO-PHASE DATE ANIMATION ──
+const scrollContainer = document.getElementById('ingredients-scroll-container');
+const dateWrap        = document.getElementById('dateVisual');
+const ingredientText  = document.getElementById('ingredientText');
+const spotlight       = document.querySelector('.date-spotlight');
 
-const slideObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-      slideObserver.unobserve(entry.target); // fire once only
-    }
-  });
-}, { threshold: 0.25 });
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
 
-slideObserver.observe(dateVisual);
+function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+}
+
+function easeInOut(t) {
+  return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+}
+
+function onScroll() {
+  const rect       = scrollContainer.getBoundingClientRect();
+  const totalScroll = scrollContainer.offsetHeight - window.innerHeight;
+
+  // progress: 0 when container top hits viewport top, 1 when fully scrolled
+  const progress = clamp(-rect.top / totalScroll, 0, 1);
+
+  // Phase 1: 0.0 → 0.5  — date peeks in from left edge, text fades in
+  // Phase 2: 0.5 → 1.0  — date glides into spotlight center, glow intensifies
+  const phase1 = easeInOut(clamp(progress / 0.5, 0, 1));
+  const phase2 = easeInOut(clamp((progress - 0.5) / 0.5, 0, 1));
+
+  // ── Date position ──
+  // Phase 1: -110% (fully off-screen) → -18% (just peeking at left edge)
+  // Phase 2: -18% → 0% (fully inside left column)
+  const dateX = lerp(lerp(-110, -18, phase1), 0, phase2);
+
+  // ── Date opacity ──
+  // Phase 1: 0 → 0.55 (partially visible at edge)
+  // Phase 2: 0.55 → 1 (fully visible in spotlight)
+  const dateOpacity = lerp(lerp(0, 0.55, phase1), 1, phase2);
+
+  // ── Spotlight glow ── only blooms in phase 2
+  const spotlightOpacity = phase2;
+
+  // ── Text ── fades up during phase 1, stays at full in phase 2
+  const textOpacity = phase1;
+  const textY       = lerp(32, 0, phase1);
+
+  // Apply to DOM
+  dateWrap.style.transform  = `translateX(${dateX}%)`;
+  dateWrap.style.opacity    = dateOpacity;
+  spotlight.style.opacity   = spotlightOpacity;
+  ingredientText.style.opacity   = textOpacity;
+  ingredientText.style.transform = `translateY(${textY}px)`;
+}
+
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll(); // initialise on load
 
 // ── PARTICLE SYSTEM ──
 const canvas = document.getElementById('particle-canvas');
 const ctx    = canvas.getContext('2d');
-let particles = [];
+let particles   = [];
 let animFrameId;
 
-// Brand palette particle colors
 const PARTICLE_COLORS = [
-  [253, 213, 105], // --champagne-gold
-  [238, 165,  61], // --warm-gold
-  [204, 131,  43], // --golden-amber
-  [161,  97,  29], // --burnished-gold
-  [124,  71,  18], // --caramel
+  [253, 213, 105], // champagne-gold
+  [238, 165,  61], // warm-gold
+  [204, 131,  43], // golden-amber
+  [161,  97,  29], // burnished-gold
+  [124,  71,  18], // caramel
 ];
 
 function resizeCanvas() {
-  const section  = document.getElementById('ingredients');
-  canvas.width   = section.offsetWidth;
-  canvas.height  = section.offsetHeight;
+  const section = document.getElementById('ingredients');
+  canvas.width  = section.offsetWidth;
+  canvas.height = section.offsetHeight;
 }
 
 class Particle {
@@ -53,8 +97,8 @@ class Particle {
   reset(initial = false) {
     this.x           = Math.random() * canvas.width;
     this.y           = initial
-                         ? Math.random() * canvas.height   // spread on load
-                         : canvas.height + 5;              // rise from bottom
+                         ? Math.random() * canvas.height
+                         : canvas.height + 5;
     this.size        = Math.random() * 2.2 + 0.4;
     this.speedX      = (Math.random() - 0.5) * 0.35;
     this.speedY      = -(Math.random() * 0.55 + 0.15);
@@ -72,7 +116,6 @@ class Particle {
   }
 
   draw() {
-    // Sine-curve fade: in at start, out at end
     const alpha = this.baseOpacity * Math.sin((this.life / this.maxLife) * Math.PI);
     const [r, g, b] = this.color;
     ctx.beginPath();
@@ -85,7 +128,7 @@ class Particle {
 function initParticles() {
   particles = [];
   for (let i = 0; i < 130; i++) {
-    particles.push(new Particle(true)); // stagger initial positions
+    particles.push(new Particle(true));
   }
 }
 
@@ -95,7 +138,6 @@ function animate() {
   animFrameId = requestAnimationFrame(animate);
 }
 
-// Debounced resize handler
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
@@ -104,10 +146,10 @@ window.addEventListener('resize', () => {
     resizeCanvas();
     initParticles();
     animate();
+    onScroll(); // recalculate animation state after resize
   }, 150);
 });
 
-// Init
 resizeCanvas();
 initParticles();
 animate();
