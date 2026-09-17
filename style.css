@@ -88,7 +88,12 @@ nav {
   justify-content: center;
   text-align: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at 55% 45%, var(--dark-amber) 0%, var(--dark-brown) 35%, var(--deep-black) 75%);
+  background: radial-gradient(
+    ellipse at 55% 45%,
+    var(--dark-amber) 0%,
+    var(--dark-brown) 35%,
+    var(--deep-black) 75%
+  );
 }
 
 .hero-overlay {
@@ -96,8 +101,8 @@ nav {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 20% 80%, rgba(92,50,9,0.45) 0%, transparent 55%),
-    radial-gradient(ellipse at 85% 15%, rgba(63,32,2,0.5)  0%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, rgba(92,50,9,0.45)    0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(63,32,2,0.5)     0%, transparent 50%),
     radial-gradient(ellipse at 50% 50%, rgba(204,131,43,0.06) 0%, transparent 65%);
 }
 
@@ -115,12 +120,12 @@ nav {
   pointer-events: none;
   background: conic-gradient(
     from 210deg at -5% -5%,
-    transparent 0deg,
-    rgba(238,165,61,0.07) 12deg,
+    transparent        0deg,
+    rgba(238,165,61,0.07)  12deg,
     rgba(253,213,105,0.04) 18deg,
-    transparent 28deg,
-    rgba(238,165,61,0.04) 40deg,
-    transparent 55deg
+    transparent        28deg,
+    rgba(238,165,61,0.04)  40deg,
+    transparent        55deg
   );
 }
 
@@ -146,7 +151,7 @@ nav {
   font-family: 'Playfair Display', serif;
   font-size: clamp(4rem, 10vw, 9rem);
   font-weight: 900;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   line-height: 1;
   background: linear-gradient(
     160deg,
@@ -160,6 +165,7 @@ nav {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   filter: drop-shadow(0 0 40px rgba(204,131,43,0.4));
+  word-spacing: -0.05em;
 }
 
 .gold-line {
@@ -223,7 +229,12 @@ nav {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: radial-gradient(ellipse at 0% 50%, var(--espresso) 0%, var(--dark-brown) 40%, var(--deep-black) 80%);
+  background: radial-gradient(
+    ellipse at 0% 50%,
+    var(--espresso)   0%,
+    var(--dark-brown) 40%,
+    var(--deep-black) 80%
+  );
 }
 
 .ing-rays {
@@ -233,13 +244,13 @@ nav {
   background:
     conic-gradient(
       from 205deg at -8% -8%,
-      transparent 0deg,
-      rgba(238,165,61,0.10) 10deg,
+      transparent            0deg,
+      rgba(238,165,61,0.10)  10deg,
       rgba(253,213,105,0.06) 16deg,
-      transparent 25deg,
-      rgba(238,165,61,0.06) 38deg,
+      transparent            25deg,
+      rgba(238,165,61,0.06)  38deg,
       rgba(253,213,105,0.03) 44deg,
-      transparent 58deg
+      transparent            58deg
     ),
     radial-gradient(ellipse at -8% 0%, rgba(204,131,43,0.22) 0%, transparent 50%);
 }
@@ -249,8 +260,8 @@ nav {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 25% 55%, rgba(92,50,9,0.35)  0%, transparent 50%),
-    radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5)   0%, transparent 45%);
+    radial-gradient(ellipse at 25% 55%, rgba(92,50,9,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5)  0%, transparent 45%);
 }
 
 #particle-canvas {
@@ -332,7 +343,7 @@ nav {
     var(--deep-black) 100%
   );
   box-shadow:
-    0 0 50px  rgba(238,165,61,0.35),
+    0 0  50px rgba(238,165,61,0.35),
     0 0 100px rgba(204,131,43,0.18),
     0 0 180px rgba(161,97,29,0.10),
     inset -18px -22px 40px rgba(4,1,0,0.6),
@@ -347,10 +358,10 @@ nav {
   width: 64%; height: 72%;
   background: repeating-linear-gradient(
     168deg,
-    transparent 0px,
-    transparent 7px,
-    rgba(4,1,0,0.18) 7px,
-    rgba(4,1,0,0.18) 8px
+    transparent       0px,
+    transparent       7px,
+    rgba(4,1,0,0.18)  7px,
+    rgba(4,1,0,0.18)  8px
   );
   border-radius: inherit;
 }
@@ -450,7 +461,11 @@ footer {
   font-size: 1.8rem;
   font-weight: 900;
   letter-spacing: 0.22em;
-  background: linear-gradient(135deg, var(--burnished-gold), var(--champagne-gold), var(--warm-gold));
+  background: linear-gradient(135deg,
+    var(--burnished-gold),
+    var(--champagne-gold),
+    var(--warm-gold)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
