@@ -15,12 +15,12 @@
     html {
       scroll-behavior: smooth;
       scroll-snap-type: y mandatory;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333333;
-      background-color: #FDFBF7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #2b2b2b;
+      background-color: #ECE7E1; /* Matched background color from UI wireframe */
     }
 
-    /* Fixed Header Navigation */
+    /* Navigation Header */
     header {
       position: fixed;
       top: 0;
@@ -29,179 +29,205 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 24px 60px;
+      padding: 30px 80px;
       z-index: 100;
-      background: rgba(253, 251, 247, 0.85);
-      backdrop-filter: blur(8px);
+      background: transparent;
     }
 
     .logo {
-      font-size: 1.5rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #1A1A1A;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #1a1a1a;
     }
 
     nav ul {
       display: flex;
       list-style: none;
-      gap: 32px;
+      gap: 36px;
     }
 
     nav a {
       text-decoration: none;
-      color: #4A4A4A;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      transition: color 0.3s ease;
+      color: #2b2b2b;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      transition: opacity 0.3s ease;
     }
 
     nav a:hover {
-      color: #000000;
+      opacity: 0.6;
     }
 
-    /* Fullscreen Slide Setup */
+    /* Section Layouts */
     .slide {
       position: relative;
       min-height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 100px 40px 40px;
-      text-align: center;
+      padding: 80px 40px;
       overflow: hidden;
       scroll-snap-align: start;
     }
 
-    /* Light Beam Animations */
-    @keyframes flickerFade {
+    /* --- LIGHT BEAM & ANIMATION --- */
+    @keyframes flickerAndFade {
       0% { opacity: 0; }
-      10% { opacity: 0.85; }
-      15% { opacity: 0.2; }
-      25% { opacity: 0.95; }
-      30% { opacity: 0.3; }
-      45% { opacity: 0.8; }
-      60% { opacity: 0.7; }
+      12% { opacity: 0.9; }
+      18% { opacity: 0.25; }
+      28% { opacity: 1; }
+      35% { opacity: 0.4; }
+      50% { opacity: 0.85; }
       100% { opacity: 0; }
     }
 
-    .light-beam {
+    .light-beam-overlay {
       position: absolute;
+      top: 0;
       width: 650px;
-      height: 1100px;
+      height: 100%;
       pointer-events: none;
-      z-index: 1;
+      z-index: 10;
       opacity: 0;
     }
 
-    .slide.animate .light-beam {
-      animation: flickerFade 3.5s ease-out forwards;
+    /* Trigger flicker on view */
+    .slide.animate .light-beam-overlay {
+      animation: flickerAndFade 3.8s ease-out forwards;
     }
 
-    /* Light Beam Positions: Alternating Right -> Left -> Right */
-    #slide1 .light-beam, #slide3 .light-beam {
-      top: -200px;
-      right: -100px;
-      background: radial-gradient(
-        ellipse at top right,
-        rgba(255, 230, 160, 0.8) 0%,
-        rgba(255, 195, 90, 0.35) 45%,
-        transparent 70%
-      );
-      transform: rotate(-15deg);
+    /* Slide 1 Light: Top-Right */
+    #slide1 .light-beam-overlay {
+      right: 0;
+      background: radial-gradient(ellipse at 100% 0%, rgba(255, 238, 175, 0.9) 0%, rgba(255, 215, 120, 0.45) 45%, rgba(236, 231, 225, 0) 75%);
     }
 
-    #slide2 .light-beam {
-      top: -200px;
-      left: -100px;
-      background: radial-gradient(
-        ellipse at top left,
-        rgba(255, 230, 160, 0.8) 0%,
-        rgba(255, 195, 90, 0.35) 45%,
-        transparent 70%
-      );
-      transform: rotate(15deg);
+    /* Slide 2 Light: Top-Left */
+    #slide2 .light-beam-overlay {
+      left: 0;
+      background: radial-gradient(ellipse at 0% 0%, rgba(255, 238, 175, 0.9) 0%, rgba(255, 215, 120, 0.45) 45%, rgba(236, 231, 225, 0) 75%);
     }
 
-    /* Slide Content Layout */
-    .content {
-      position: relative;
+    /* Slide 3 Light: Top-Right */
+    #slide3 .light-beam-overlay {
+      right: 0;
+      background: radial-gradient(ellipse at 100% 0%, rgba(255, 238, 175, 0.9) 0%, rgba(255, 215, 120, 0.45) 45%, rgba(236, 231, 225, 0) 75%);
+    }
+
+    /* Slide 1 Hero Layout */
+    #slide1 .hero-content {
+      text-align: center;
+      max-width: 650px;
       z-index: 2;
-      max-width: 680px;
     }
 
     #slide1 h1 {
-      font-size: 3.5rem;
-      letter-spacing: 4px;
-      font-weight: 800;
-      margin-bottom: 8px;
+      font-size: 4rem;
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: #111111;
+      margin-bottom: 12px;
     }
 
-    #slide1 .subtitle {
-      font-size: 1.1rem;
-      letter-spacing: 2px;
-      font-weight: 600;
-      color: #555555;
-      margin-bottom: 20px;
+    #slide1 .tagline {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #333333;
+      margin-bottom: 24px;
     }
 
-    #slide1 .description {
+    #slide1 .subtext {
       font-size: 1.05rem;
-      color: #666666;
       line-height: 1.6;
-      margin-bottom: 40px;
+      color: #555555;
+      margin-bottom: 50px;
     }
 
-    .scroll-arrow {
+    .arrow-down {
       display: inline-block;
       font-size: 1.8rem;
-      color: #333333;
+      color: #222222;
       text-decoration: none;
       transition: transform 0.3s ease;
     }
 
-    .scroll-arrow:hover {
+    .arrow-down:hover {
       transform: translateY(6px);
     }
 
-    #slide2 h2, #slide3 h2 {
-      font-size: 2.2rem;
+    /* Two-Column Layout for Slide 2 & Slide 3 */
+    .two-column-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 1100px;
+      width: 100%;
+      gap: 60px;
+      z-index: 2;
+    }
+
+    .image-box {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Card background matching UI wireframe */
+    .fruit-card {
+      width: 320px;
+      height: 380px;
+      background: #FFFFFF;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      color: #888888;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .text-box {
+      flex: 1;
+      text-align: left;
+    }
+
+    .text-box h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
       letter-spacing: 2px;
-      margin-bottom: 24px;
+      color: #111111;
+      margin-bottom: 20px;
     }
 
-    #slide2 p, #slide3 p {
+    .text-box p {
       font-size: 1.05rem;
-      line-height: 1.8;
-      color: #4A4A4A;
-      text-align: justify;
+      line-height: 1.85;
+      color: #444444;
     }
 
-    /* Floating Animation for Slide 3 */
+    /* Slide 3 Floating Animation */
     @keyframes floatInAir {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-12px) rotate(1.5deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
     }
 
-    #slide3 .floating-element {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-    }
-
-    #slide3.animate .floating-element {
-      opacity: 1;
-      transform: translateY(0px);
-      animation: floatInAir 4s ease-in-out infinite 0.6s;
+    #slide3 .fruit-card {
+      animation: floatInAir 4s ease-in-out infinite;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Header -->
+  <!-- Fixed Header Navigation -->
   <header>
     <div class="logo">NUTRIVE</div>
     <nav>
@@ -214,67 +240,74 @@
     </nav>
   </header>
 
-  <!-- Slide 1: Light Beam Top-Right -->
+  <!-- Slide 1: Light Top-Right -->
   <section id="slide1" class="slide">
-    <div class="light-beam"></div>
-    <div class="content">
+    <div class="light-beam-overlay"></div>
+    <div class="hero-content">
       <h1>NUTRIVÈ</h1>
-      <div class="subtitle">SMALL BITE. BIG ENERGY.</div>
-      <p class="description">
+      <div class="tagline">SMALL BITE. BIG ENERGY.</div>
+      <p class="subtext">
         Crafted with nature's finest ingredients,<br>
         for your everyday energy.
       </p>
-      <a href="#slide2" class="scroll-arrow" aria-label="Scroll down">&#x2193;</a>
+      <a href="#slide2" class="arrow-down" aria-label="Scroll down">&#x2193;</a>
     </div>
   </section>
 
-  <!-- Slide 2: Light Beam Top-Left -->
+  <!-- Slide 2: Light Top-Left -->
   <section id="slide2" class="slide">
-    <div class="light-beam"></div>
-    <div class="content">
-      <h2>Dates</h2>
-      <p>
-        Dates contain a lot of energy, dietary fiber, and minerals. That makes them an excellent healthy basis for any meal. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals. Dates are sweet enough even without any added sugar.
-      </p>
-    </div>
-  </section>
-
-  <!-- Slide 3: Light Beam Top-Right + Floating Element -->
-  <section id="slide3" class="slide">
-    <div class="light-beam"></div>
-    <div class="content">
-      <div class="floating-element">
-        <h2>Dates</h2>
+    <div class="light-beam-overlay"></div>
+    <div class="two-column-container">
+      <div class="image-box">
+        <div class="fruit-card">
+          <span>[ Date Image ]</span>
+        </div>
       </div>
-      <p>
-        Dates contain a lot of energy, dietary fiber, and minerals. That makes them an excellent healthy basis for any meal. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals. Dates are sweet enough even without any added sugar.
-      </p>
+      <div class="text-box">
+        <h2>Dates</h2>
+        <p>
+          Dates contain a lot of energy, dietary fiber, and minerals[cite: 1]. That makes them an excellent healthy basis for any meal[cite: 1]. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals[cite: 1]. Dates are sweet enough even without any added sugar[cite: 1].
+        </p>
+      </div>
     </div>
   </section>
 
+  <!-- Slide 3: Light Top-Right + Floating Card -->
+  <section id="slide3" class="slide">
+    <div class="light-beam-overlay"></div>
+    <div class="two-column-container">
+      <div class="image-box">
+        <div class="fruit-card">
+          <span>[ Date Image ]</span>
+        </div>
+      </div>
+      <div class="text-box">
+        <h2>Dates</h2>
+        <p>
+          Dates contain a lot of energy, dietary fiber, and minerals[cite: 1]. That makes them an excellent healthy basis for any meal[cite: 1]. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals[cite: 1]. Dates are sweet enough even without any added sugar[cite: 1].
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intersection Observer Script -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const slides = document.querySelectorAll('.slide');
 
-      const observerOptions = {
-        root: null,
-        threshold: 0.5
-      };
-
-      const slideObserver = new IntersectionObserver((entries) => {
+      const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.remove('animate');
-            void entry.target.offsetWidth; // Trigger CSS reflow
+            void entry.target.offsetWidth; // Force CSS repaint
             entry.target.classList.add('animate');
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.5 });
 
-      slides.forEach(slide => {
-        slideObserver.observe(slide);
-      });
+      slides.forEach(slide => observer.observe(slide));
     });
   </script>
+
 </body>
 </html>
