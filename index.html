@@ -1,302 +1,735 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NUTRIVE - Small Bite. Big Energy.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NUTRIV È</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
-    /* Reset & Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      /* Base & Backgrounds */
+      --deep-black:   #040100;
+      --dark-brown:   #110600;
+      --espresso:     #241001;
+      /* Mid-tones */
+      --dark-amber:   #3F2002;
+      --bronze:       #5C3209;
+      --caramel:      #7C4712;
+      /* Accents & Typography */
+      --burnished-gold:  #A1611D;
+      --golden-amber:    #CC832B;
+      --warm-gold:       #EEA53D;
+      --champagne-gold:  #FDD569;
+      /* Utility */
+      --white: #f5f0e8;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      color: #EEA53D; /* Warm Gold text */
-      background: radial-gradient(circle, #3F2002 0%, #110600 55%, #040100 100%);
-      background-attachment: fixed;
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--deep-black);
+      color: var(--white);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
     }
 
-    /* Navigation Header */
-    header {
+    /* ── NAVBAR ── */
+    nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 30px 80px;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: transparent;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 900;
-      letter-spacing: 3px;
-      color: #FDD569; /* Champagne Gold */
-    }
-
-    nav ul {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(4, 1, 0, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(161, 97, 29, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
       list-style: none;
-      gap: 36px;
     }
 
-    nav a {
+    .nav-links a {
+      color: var(--white);
       text-decoration: none;
-      color: #EEA53D; /* Warm Gold */
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      transition: opacity 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
 
-    nav a:hover {
-      opacity: 0.6;
+    .nav-links a:hover { color: var(--warm-gold); }
+
+    .nav-icons {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
     }
 
-    /* Section Layouts */
-    .slide {
+    .nav-icons button {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .nav-icons button:hover { color: var(--warm-gold); }
+
+    /* ── HERO SECTION ── */
+    #hero {
       position: relative;
-      min-height: 100vh;
-      width: 100%;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 80px 40px;
-      overflow: hidden;
-      scroll-snap-align: start;
-    }
-
-    /* --- LIGHT BEAM & ANIMATION --- */
-    @keyframes flickerAndFade {
-      0% { opacity: 0; }
-      12% { opacity: 0.85; }
-      18% { opacity: 0.2; }
-      28% { opacity: 0.95; }
-      35% { opacity: 0.35; }
-      50% { opacity: 0.8; }
-      100% { opacity: 0; }
-    }
-
-    .light-beam-overlay {
-      position: absolute;
-      top: 0;
-      width: 650px;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      opacity: 0;
-    }
-
-    /* Trigger flicker on view */
-    .slide.animate .light-beam-overlay {
-      animation: flickerAndFade 3.8s ease-out forwards;
-    }
-
-    /* Slide 1 Light: Top-Right */
-    #slide1 .light-beam-overlay {
-      right: 0;
-      background: radial-gradient(ellipse at 100% 0%, rgba(253, 213, 105, 0.45) 0%, rgba(238, 165, 61, 0.2) 40%, rgba(92, 50, 9, 0) 75%);
-    }
-
-    /* Slide 2 Light: Top-Left */
-    #slide2 .light-beam-overlay {
-      left: 0;
-      background: radial-gradient(ellipse at 0% 0%, rgba(253, 213, 105, 0.45) 0%, rgba(238, 165, 61, 0.2) 40%, rgba(92, 50, 9, 0) 75%);
-    }
-
-    /* Slide 3 Light: Top-Right */
-    #slide3 .light-beam-overlay {
-      right: 0;
-      background: radial-gradient(ellipse at 100% 0%, rgba(253, 213, 105, 0.45) 0%, rgba(238, 165, 61, 0.2) 40%, rgba(92, 50, 9, 0) 75%);
-    }
-
-    /* Slide 1 Hero Layout */
-    #slide1 .hero-content {
+      justify-content: center;
       text-align: center;
-      max-width: 650px;
-      z-index: 2;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 55% 45%, var(--dark-amber) 0%, var(--dark-brown) 35%, var(--deep-black) 75%);
     }
 
-    #slide1 h1 {
-      font-size: 4rem;
+    /* Layered atmospheric overlays */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(92, 50, 9, 0.45) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(63, 32, 2, 0.5) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(204, 131, 43, 0.06) 0%, transparent 65%);
+    }
+
+    /* Subtle stone-texture dot grid */
+    .hero-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(161,97,29,0.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+
+    /* Cinematic light ray from top-left */
+    .hero-ray {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: conic-gradient(
+        from 210deg at -5% -5%,
+        transparent 0deg,
+        rgba(238,165,61,0.07) 12deg,
+        rgba(253,213,105,0.04) 18deg,
+        transparent 28deg,
+        rgba(238,165,61,0.04) 40deg,
+        transparent 55deg
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    /* Leaf SVG */
+    .leaf-logo {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 0.4rem;
+      filter:
+        drop-shadow(0 0 10px rgba(253,213,105,0.5))
+        drop-shadow(0 0 25px rgba(204,131,43,0.3));
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
       font-weight: 900;
-      letter-spacing: 6px;
-      color: #FDD569; /* Champagne Gold */
-      margin-bottom: 12px;
+      letter-spacing: 0.15em;
+      line-height: 1;
+      /* Gradient text: burnished → champagne → warm gold */
+      background: linear-gradient(
+        160deg,
+        var(--burnished-gold) 0%,
+        var(--warm-gold) 40%,
+        var(--champagne-gold) 55%,
+        var(--warm-gold) 70%,
+        var(--burnished-gold) 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      filter: drop-shadow(0 0 40px rgba(204,131,43,0.4));
     }
 
-    #slide1 .tagline {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 3px;
-      color: #CC832B; /* Golden Amber */
-      margin-bottom: 24px;
+    .gold-line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--warm-gold), transparent);
+      margin: 0.2rem auto;
     }
 
-    #slide1 .subtext {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #EEA53D; /* Warm Gold */
-      margin-bottom: 50px;
+    .tagline {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.8rem, 2vw, 1.05rem);
+      font-weight: 600;
+      letter-spacing: 0.45em;
+      color: var(--white);
+      text-transform: uppercase;
     }
 
-    .arrow-down {
-      display: inline-block;
-      font-size: 1.8rem;
-      color: #FDD569; /* Champagne Gold */
-      text-decoration: none;
-      transition: transform 0.3s ease;
+    .value-prop {
+      font-size: clamp(0.72rem, 1.4vw, 0.9rem);
+      font-weight: 300;
+      color: rgba(245,240,232,0.55);
+      letter-spacing: 0.1em;
     }
 
-    .arrow-down:hover {
-      transform: translateY(6px);
+    /* Scroll arrow */
+    .scroll-arrow {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      animation: bounce 2.2s ease-in-out infinite;
+      cursor: pointer;
     }
 
-    /* Two-Column Layout for Slide 2 & Slide 3 */
-    .two-column-container {
+    .scroll-arrow .arrow-line {
+      width: 1px;
+      height: 38px;
+      background: linear-gradient(to bottom, transparent, var(--golden-amber));
+    }
+
+    .scroll-arrow .arrow-tip {
+      color: var(--golden-amber);
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+      50%       { transform: translateX(-50%) translateY(9px); opacity: 0.6; }
+    }
+
+    /* ── INGREDIENTS SECTION ── */
+    #ingredients {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 0% 50%, var(--espresso) 0%, var(--dark-brown) 40%, var(--deep-black) 80%);
+    }
+
+    /* Cinematic golden light rays from top-left */
+    .ing-rays {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        conic-gradient(
+          from 205deg at -8% -8%,
+          transparent 0deg,
+          rgba(238,165,61,0.10) 10deg,
+          rgba(253,213,105,0.06) 16deg,
+          transparent 25deg,
+          rgba(238,165,61,0.06) 38deg,
+          rgba(253,213,105,0.03) 44deg,
+          transparent 58deg
+        ),
+        radial-gradient(ellipse at -8% 0%, rgba(204,131,43,0.22) 0%, transparent 50%);
+    }
+
+    /* Ambient mid-glow */
+    .ing-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse at 25% 55%, rgba(92,50,9,0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5) 0%, transparent 45%);
+    }
+
+    /* Particle canvas */
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .ingredients-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    /* Left: Date visual */
+    .date-visual-wrap {
       display: flex;
       align-items: center;
       justify-content: center;
-      max-width: 1100px;
-      width: 100%;
-      gap: 60px;
+      padding: 4rem 2rem;
+      transform: translateX(-130px);
+      opacity: 0;
+      transition:
+        transform 1.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 1.3s ease;
+    }
+
+    .date-visual-wrap.in-view {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .date-fruit {
+      position: relative;
+      width: clamp(170px, 20vw, 270px);
+      height: clamp(230px, 28vw, 360px);
+    }
+
+    /* Spotlight glow behind date */
+    .date-spotlight {
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(ellipse at center,
+        rgba(253,213,105,0.22) 0%,
+        rgba(238,165,61,0.14) 30%,
+        rgba(204,131,43,0.07) 55%,
+        transparent 75%
+      );
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    /* Stem */
+    .date-stem {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 7px;
+      height: 24px;
+      background: linear-gradient(to bottom, var(--bronze), var(--espresso));
+      border-radius: 3px 3px 0 0;
       z-index: 2;
     }
 
-    .image-box {
-      flex: 1;
+    /* Main date body */
+    .date-body {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border-radius: 50% 50% 44% 44% / 60% 60% 40% 40%;
+      background: radial-gradient(ellipse at 32% 28%,
+        var(--caramel)      0%,
+        var(--bronze)       28%,
+        var(--dark-amber)   55%,
+        var(--espresso)     75%,
+        var(--deep-black)   100%
+      );
+      box-shadow:
+        0 0 50px rgba(238,165,61,0.35),
+        0 0 100px rgba(204,131,43,0.18),
+        0 0 180px rgba(161,97,29,0.10),
+        inset -18px -22px 40px rgba(4,1,0,0.6),
+        inset 8px 10px 28px rgba(124,71,18,0.25);
+      overflow: hidden;
+    }
+
+    /* Wrinkle texture */
+    .date-body::before {
+      content: '';
+      position: absolute;
+      top: 12%; left: 18%;
+      width: 64%; height: 72%;
+      background: repeating-linear-gradient(
+        168deg,
+        transparent 0px,
+        transparent 7px,
+        rgba(4,1,0,0.18) 7px,
+        rgba(4,1,0,0.18) 8px
+      );
+      border-radius: inherit;
+    }
+
+    /* Specular highlight (champagne glint) */
+    .date-body::after {
+      content: '';
+      position: absolute;
+      top: 8%; left: 12%;
+      width: 28%; height: 22%;
+      background: radial-gradient(ellipse,
+        rgba(253,213,105,0.30) 0%,
+        rgba(238,165,61,0.10) 60%,
+        transparent 100%
+      );
+      border-radius: 50%;
+    }
+
+    /* Right: Text */
+    .ingredient-text {
+      padding: 4rem 5rem 4rem 2rem;
+    }
+
+    .ingredient-label {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.38em;
+      color: var(--golden-amber);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .ingredient-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 60px rgba(204,131,43,0.2);
+    }
+
+    .ingredient-divider {
+      width: 50px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--warm-gold), var(--burnished-gold), transparent);
+      margin-bottom: 1.5rem;
+    }
+
+    .ingredient-desc {
+      font-size: clamp(0.82rem, 1.4vw, 0.97rem);
+      font-weight: 300;
+      line-height: 1.95;
+      color: rgba(245,240,232,0.65);
+      max-width: 420px;
+    }
+
+    .ingredient-desc strong {
+      color: var(--warm-gold);
+      font-weight: 600;
+    }
+
+    .nutrient-tags {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .tag {
+      padding: 0.38rem 1rem;
+      border: 1px solid rgba(161,97,29,0.45);
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--golden-amber);
+      text-transform: uppercase;
+      background: rgba(63,32,2,0.3);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .tag:hover {
+      background: rgba(92,50,9,0.5);
+      border-color: var(--warm-gold);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep-black);
+      border-top: 1px solid rgba(161,97,29,0.2);
+      padding: 3rem 3rem 2rem;
+      text-align: center;
+    }
+
+    .footer-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 0.22em;
+      background: linear-gradient(135deg, var(--burnished-gold), var(--champagne-gold), var(--warm-gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      color: rgba(245,240,232,0.35);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links {
       display: flex;
       justify-content: center;
-      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      margin-bottom: 2rem;
     }
 
-    /* Image Container */
-    .dates-img {
-      max-width: 380px;
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 25px #241001); /* Deep warm shadow */
+    .footer-links a {
+      color: rgba(245,240,232,0.45);
+      text-decoration: none;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
 
-    .text-box {
-      flex: 1;
-      text-align: left;
+    .footer-links a:hover { color: var(--warm-gold); }
+
+    .footer-copy {
+      font-size: 0.62rem;
+      color: rgba(245,240,232,0.2);
+      letter-spacing: 0.1em;
     }
 
-    .text-box h2 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      color: #FDD569; /* Champagne Gold */
-      margin-bottom: 20px;
-    }
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.62rem; letter-spacing: 0.15em; }
 
-    .text-box p {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      color: #EEA53D; /* Warm Gold */
-    }
+      .ingredients-inner {
+        grid-template-columns: 1fr;
+      }
 
-    /* Slide 3 Floating Animation */
-    @keyframes floatInAir {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-      100% { transform: translateY(0px); }
-    }
+      .date-visual-wrap {
+        padding: 6rem 2rem 2rem;
+        transform: translateY(60px);
+      }
 
-    #slide3 .dates-img {
-      animation: floatInAir 4s ease-in-out infinite;
+      .date-visual-wrap.in-view { transform: translateY(0); }
+
+      .ingredient-text {
+        padding: 2rem 1.5rem 4rem;
+        text-align: center;
+      }
+
+      .ingredient-divider { margin: 0 auto 1.5rem; }
+      .ingredient-desc { max-width: 100%; }
+      .nutrient-tags { justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Fixed Header Navigation -->
-  <header>
-    <div class="logo">NUTRIVE</div>
-    <nav>
-      <ul>
-        <li><a href="#slide1">HOME</a></li>
-        <li><a href="#slide2">OUR STORY</a></li>
-        <li><a href="#slide2">INGREDIENTS</a></li>
-        <li><a href="#slide3">SHOP</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- ── NAVBAR ── -->
+  <nav>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#ingredients">Ingredients</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+    <div class="nav-icons">
+      <button aria-label="Search">🔍</button>
+      <button aria-label="Cart">🛒</button>
+      <button aria-label="Menu">☰</button>
+    </div>
+  </nav>
 
-  <!-- Slide 1: Light Top-Right -->
-  <section id="slide1" class="slide">
-    <div class="light-beam-overlay"></div>
+  <!-- ── HERO SECTION ── -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-ray"></div>
+
     <div class="hero-content">
-      <h1>NUTRIVÈ</h1>
-      <div class="tagline">SMALL BITE. BIG ENERGY.</div>
-      <p class="subtext">
-        Crafted with nature's finest ingredients,<br>
-        for your everyday energy.
-      </p>
-      <a href="#slide2" class="arrow-down" aria-label="Scroll down">&#x2193;</a>
+      <!-- Leaf SVG Logo -->
+      <svg class="leaf-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#A1611D"/>
+            <stop offset="50%"  stop-color="#EEA53D"/>
+            <stop offset="100%" stop-color="#FDD569"/>
+          </linearGradient>
+        </defs>
+        <path d="M24 4 C24 4, 8 14, 8 28 C8 36, 15 42, 24 44 C33 42, 40 36, 40 28 C40 14, 24 4, 24 4Z"
+              fill="none" stroke="url(#leafGrad)" stroke-width="1.5"/>
+        <path d="M24 44 C24 44, 24 22, 24 8"
+              stroke="#CC832B" stroke-width="1" stroke-dasharray="2 3" opacity="0.8"/>
+        <path d="M24 30 C24 30, 13 23, 9 16"
+              stroke="#A1611D" stroke-width="1" opacity="0.6"/>
+        <path d="M24 23 C24 23, 35 16, 39 10"
+              stroke="#A1611D" stroke-width="1" opacity="0.6"/>
+        <circle cx="24" cy="44" r="2" fill="#EEA53D"/>
+      </svg>
+
+      <h1 class="brand-name">NUTRIV È</h1>
+      <div class="gold-line"></div>
+      <p class="tagline">Small Bite. Big Energy.</p>
+      <p class="value-prop">Crafted from nature's finest ingredients. Pure energy, zero compromise.</p>
+    </div>
+
+    <div class="scroll-arrow"
+         onclick="document.getElementById('ingredients').scrollIntoView({behavior:'smooth'})">
+      <div class="arrow-line"></div>
+      <div class="arrow-tip">↓</div>
     </div>
   </section>
 
-  <!-- Slide 2: Light Top-Left -->
-  <section id="slide2" class="slide">
-    <div class="light-beam-overlay"></div>
-    <div class="two-column-container">
-      <div class="image-box">
-        <img src="dates.png" alt="Dates" class="dates-img">
+  <!-- ── INGREDIENTS SECTION ── -->
+  <section id="ingredients">
+    <canvas id="particle-canvas"></canvas>
+    <div class="ing-rays"></div>
+    <div class="ing-glow"></div>
+
+    <div class="ingredients-inner">
+
+      <!-- Left: Date Visual -->
+      <div class="date-visual-wrap" id="dateVisual">
+        <div class="date-fruit">
+          <div class="date-spotlight"></div>
+          <div class="date-stem"></div>
+          <div class="date-body"></div>
+        </div>
       </div>
-      <div class="text-box">
-        <h2>Dates</h2>
-        <p>
-          Dates contain a lot of energy, dietary fiber, and minerals. That makes them an excellent healthy basis for any meal. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals. Dates are sweet enough even without any added sugar.
+
+      <!-- Right: Text -->
+      <div class="ingredient-text">
+        <p class="ingredient-label">Key Ingredient</p>
+        <h2 class="ingredient-title">Dates</h2>
+        <div class="ingredient-divider"></div>
+        <p class="ingredient-desc">
+          Rich in <strong>potassium</strong>, <strong>dietary fiber</strong>, and
+          <strong>magnesium</strong>, dates provide sustained natural energy and support
+          digestive health. A cornerstone of the NUTRIV È formula — nature's original
+          energy source, refined for the modern body.
         </p>
+        <div class="nutrient-tags">
+          <span class="tag">Potassium</span>
+          <span class="tag">Dietary Fiber</span>
+          <span class="tag">Magnesium</span>
+          <span class="tag">Natural Energy</span>
+        </div>
       </div>
+
     </div>
   </section>
 
-  <!-- Slide 3: Light Top-Right + Floating Image -->
-  <section id="slide3" class="slide">
-    <div class="light-beam-overlay"></div>
-    <div class="two-column-container">
-      <div class="image-box">
-        <img src="dates.png" alt="Dates" class="dates-img">
-      </div>
-      <div class="text-box">
-        <h2>Dates</h2>
-        <p>
-          Dates contain a lot of energy, dietary fiber, and minerals. That makes them an excellent healthy basis for any meal. These fruits are good for the cardiovascular system due to the high potassium content, they help to restore the strength of the muscular system because of magnesium, and they also contain powerful antioxidants that protect the body from free radicals. Dates are sweet enough even without any added sugar.
-        </p>
-      </div>
-    </div>
-  </section>
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-brand">NUTRIV È</div>
+    <p class="footer-tagline">Small Bite. Big Energy.</p>
+    <ul class="footer-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#ingredients">Ingredients</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 NUTRIV È. All rights reserved.</p>
+  </footer>
 
-  <!-- Intersection Observer Script -->
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slides = document.querySelectorAll('.slide');
+    // ── INTERSECTION OBSERVER: Date slide-in ──
+    const dateVisual = document.getElementById('dateVisual');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, { threshold: 0.25 });
+    observer.observe(dateVisual);
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove('animate');
-            void entry.target.offsetWidth; // Force CSS repaint
-            entry.target.classList.add('animate');
-          }
-        });
-      }, { threshold: 0.5 });
+    // ── PARTICLE SYSTEM ──
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
 
-      slides.forEach(slide => observer.observe(slide));
-    });
+    // Particle colors pulled from the brand palette
+    const PARTICLE_COLORS = [
+      [253, 213, 105], // champagne-gold
+      [238, 165,  61], // warm-gold
+      [204, 131,  43], // golden-amber
+      [161,  97,  29], // burnished-gold
+      [124,  71,  18], // caramel
+    ];
+
+    function resizeCanvas() {
+      const section = document.getElementById('ingredients');
+      canvas.width  = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+    }
+
+    class Particle {
+      constructor() { this.reset(true); }
+
+      reset(initial = false) {
+        this.x      = Math.random() * canvas.width;
+        this.y      = initial ? Math.random() * canvas.height : canvas.height + 5;
+        this.size   = Math.random() * 2.2 + 0.4;
+        this.speedX = (Math.random() - 0.5) * 0.35;
+        this.speedY = -(Math.random() * 0.55 + 0.15);
+        this.life   = 0;
+        this.maxLife = Math.random() * 220 + 80;
+        this.color  = PARTICLE_COLORS[Math.floor(Math.random() * PARTICLE_COLORS.length)];
+        this.baseOpacity = Math.random() * 0.55 + 0.1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.life++;
+        if (this.life > this.maxLife || this.y < -5) this.reset();
+      }
+
+      draw() {
+        const progress = this.life / this.maxLife;
+        // Fade in then fade out
+        const alpha = this.baseOpacity * Math.sin(progress * Math.PI);
+        const [r, g, b] = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 130; i++) particles.push(new Particle());
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+    resizeCanvas();
+    initParticles();
+    animate();
   </script>
 
 </body>
