@@ -4,7 +4,200 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NUTRIVE - Small Bite. Big Energy.</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Reset & Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333333;
+      background-color: #FDFBF7;
+    }
+
+    /* Fixed Header Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 60px;
+      z-index: 100;
+      background: rgba(253, 251, 247, 0.85);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #1A1A1A;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #4A4A4A;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #000000;
+    }
+
+    /* Fullscreen Slide Setup */
+    .slide {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 100px 40px 40px;
+      text-align: center;
+      overflow: hidden;
+      scroll-snap-align: start;
+    }
+
+    /* Light Beam Animations */
+    @keyframes flickerFade {
+      0% { opacity: 0; }
+      10% { opacity: 0.85; }
+      15% { opacity: 0.2; }
+      25% { opacity: 0.95; }
+      30% { opacity: 0.3; }
+      45% { opacity: 0.8; }
+      60% { opacity: 0.7; }
+      100% { opacity: 0; }
+    }
+
+    .light-beam {
+      position: absolute;
+      width: 650px;
+      height: 1100px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    .slide.animate .light-beam {
+      animation: flickerFade 3.5s ease-out forwards;
+    }
+
+    /* Light Beam Positions: Alternating Right -> Left -> Right */
+    #slide1 .light-beam, #slide3 .light-beam {
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(
+        ellipse at top right,
+        rgba(255, 230, 160, 0.8) 0%,
+        rgba(255, 195, 90, 0.35) 45%,
+        transparent 70%
+      );
+      transform: rotate(-15deg);
+    }
+
+    #slide2 .light-beam {
+      top: -200px;
+      left: -100px;
+      background: radial-gradient(
+        ellipse at top left,
+        rgba(255, 230, 160, 0.8) 0%,
+        rgba(255, 195, 90, 0.35) 45%,
+        transparent 70%
+      );
+      transform: rotate(15deg);
+    }
+
+    /* Slide Content Layout */
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 680px;
+    }
+
+    #slide1 h1 {
+      font-size: 3.5rem;
+      letter-spacing: 4px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    #slide1 .subtitle {
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      font-weight: 600;
+      color: #555555;
+      margin-bottom: 20px;
+    }
+
+    #slide1 .description {
+      font-size: 1.05rem;
+      color: #666666;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .scroll-arrow {
+      display: inline-block;
+      font-size: 1.8rem;
+      color: #333333;
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    .scroll-arrow:hover {
+      transform: translateY(6px);
+    }
+
+    #slide2 h2, #slide3 h2 {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      margin-bottom: 24px;
+    }
+
+    #slide2 p, #slide3 p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #4A4A4A;
+      text-align: justify;
+    }
+
+    /* Floating Animation for Slide 3 */
+    @keyframes floatInAir {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(1.5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    #slide3 .floating-element {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+    }
+
+    #slide3.animate .floating-element {
+      opacity: 1;
+      transform: translateY(0px);
+      animation: floatInAir 4s ease-in-out infinite 0.6s;
+    }
+  </style>
 </head>
 <body>
 
@@ -21,7 +214,7 @@
     </nav>
   </header>
 
-  <!-- Slide 1: Light Top-Right -->
+  <!-- Slide 1: Light Beam Top-Right -->
   <section id="slide1" class="slide">
     <div class="light-beam"></div>
     <div class="content">
@@ -35,7 +228,7 @@
     </div>
   </section>
 
-  <!-- Slide 2: Light Top-Left -->
+  <!-- Slide 2: Light Beam Top-Left -->
   <section id="slide2" class="slide">
     <div class="light-beam"></div>
     <div class="content">
@@ -46,7 +239,7 @@
     </div>
   </section>
 
-  <!-- Slide 3: Light Top-Right + Floating Element -->
+  <!-- Slide 3: Light Beam Top-Right + Floating Element -->
   <section id="slide3" class="slide">
     <div class="light-beam"></div>
     <div class="content">
@@ -59,6 +252,29 @@
     </div>
   </section>
 
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+
+      const observerOptions = {
+        root: null,
+        threshold: 0.5
+      };
+
+      const slideObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove('animate');
+            void entry.target.offsetWidth; // Trigger CSS reflow
+            entry.target.classList.add('animate');
+          }
+        });
+      }, observerOptions);
+
+      slides.forEach(slide => {
+        slideObserver.observe(slide);
+      });
+    });
+  </script>
 </body>
 </html>
