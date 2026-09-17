@@ -1,22 +1,28 @@
 /* ─────────────────────────────────────────
    NUTRIVÈ  |  script.js
    - Scroll arrow
-   - Scroll-driven two-phase date animation
+   - Slide 2: date peeks in half-way at the left edge
+   - Slide 3: date glides from half to fully visible
    - Canvas particle system
 ───────────────────────────────────────── */
 
 // ── SCROLL ARROW ──
 document.getElementById('scrollArrow').addEventListener('click', () => {
-  document.getElementById('ingredients-scroll-container')
+  document.getElementById('ingredient-teaser')
     .scrollIntoView({ behavior: 'smooth' });
 });
 
-// ── SCROLL-DRIVEN TWO-PHASE DATE ANIMATION ──
-const scrollContainer = document.getElementById('ingredients-scroll-container');
-const dateWrap        = document.getElementById('dateVisual');
-const ingredientText  = document.getElementById('ingredientText');
-const spotlight       = document.querySelector('.date-spotlight');
+// ── ELEMENTS ──
+const teaserSection      = document.getElementById('ingredient-teaser');
+const teaserDate         = document.getElementById('teaserDate');
+const teaserText         = document.getElementById('teaserText');
 
+const ingredientsSection = document.getElementById('ingredients');
+const dateWrap           = document.getElementById('dateVisual');
+const ingredientText     = document.getElementById('ingredientText');
+const spotlight          = document.querySelector('.date-spotlight');
+
+// ── HELPERS ──
 function lerp(a, b, t) {
   return a + (b - a) * t;
 }
@@ -29,42 +35,34 @@ function easeInOut(t) {
   return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
 }
 
+// 0 when the section's top is at the bottom of the viewport,
+// 1 when the section's top reaches the top of the viewport (fully in view)
+function enterProgress(section) {
+  const rect = section.getBoundingClientRect();
+  return clamp((window.innerHeight - rect.top) / window.innerHeight, 0, 1);
+}
+
+// ── SCROLL-DRIVEN ANIMATIONS ──
 function onScroll() {
-  const rect        = scrollContainer.getBoundingClientRect();
-  // Scroll room = container height minus the pinned section (never 0)
-  const totalScroll = Math.max(scrollContainer.offsetHeight - window.innerHeight, 1);
+  /* Slide 2: date slides in from off-screen and stops half visible */
+  const p2 = easeInOut(enterProgress(teaserSection));
 
-  // progress: 0 when container top hits viewport top, 1 when fully scrolled
-  const progress = clamp(-rect.top / totalScroll, 0, 1);
+  const teaserX = lerp(-110, -50, p2);   // -50% = exactly half hidden
+  teaserDate.style.transform = `translate(${teaserX}%, -50%)`;
+  teaserDate.style.opacity   = p2;
 
-  // Phase 1: 0.0 → 0.5  — date peeks in from left edge, text fades in
-  // Phase 2: 0.5 → 1.0  — date glides into spotlight center, glow intensifies
-  const phase1 = easeInOut(clamp(progress / 0.5, 0, 1));
-  const phase2 = easeInOut(clamp((progress - 0.5) / 0.5, 0, 1));
+  teaserText.style.opacity   = p2;
+  teaserText.style.transform = `translateY(${lerp(32, 0, p2)}px)`;
 
-  // ── Date position ──
-  // Phase 1: -110% (fully off-screen) → -18% (just peeking at left edge)
-  // Phase 2: -18% → 0% (fully inside left column)
-  const dateX = lerp(lerp(-110, -18, phase1), 0, phase2);
+  /* Slide 3: date moves from half-way left to centre, glow blooms, text fades up */
+  const p3 = easeInOut(enterProgress(ingredientsSection));
 
-  // ── Date opacity ──
-  // Phase 1: 0 → 0.55 (partially visible at edge)
-  // Phase 2: 0.55 → 1 (fully visible in spotlight)
-  const dateOpacity = lerp(lerp(0, 0.55, phase1), 1, phase2);
+  dateWrap.style.transform = `translateX(${lerp(-50, 0, p3)}%)`;
+  dateWrap.style.opacity   = lerp(0.5, 1, p3);
+  spotlight.style.opacity  = p3;
 
-  // ── Spotlight glow ── only blooms in phase 2
-  const spotlightOpacity = phase2;
-
-  // ── Text ── fades up during phase 1, stays at full in phase 2
-  const textOpacity = phase1;
-  const textY       = lerp(32, 0, phase1);
-
-  // Apply to DOM
-  dateWrap.style.transform  = `translateX(${dateX}%)`;
-  dateWrap.style.opacity    = dateOpacity;
-  spotlight.style.opacity   = spotlightOpacity;
-  ingredientText.style.opacity   = textOpacity;
-  ingredientText.style.transform = `translateY(${textY}px)`;
+  ingredientText.style.opacity   = p3;
+  ingredientText.style.transform = `translateY(${lerp(32, 0, p3)}px)`;
 }
 
 window.addEventListener('scroll', onScroll, { passive: true });
@@ -85,9 +83,8 @@ const PARTICLE_COLORS = [
 ];
 
 function resizeCanvas() {
-  const section = document.getElementById('ingredients');
-  canvas.width  = section.offsetWidth;
-  canvas.height = section.offsetHeight;
+  canvas.width  = ingredientsSection.offsetWidth;
+  canvas.height = ingredientsSection.offsetHeight;
 }
 
 class Particle {

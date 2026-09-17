@@ -78,7 +78,7 @@ nav {
 
 .nav-icons button:hover { color: var(--warm-gold); }
 
-/* ── HERO ── */
+/* ── SLIDE 1: HERO ── */
 #hero {
   position: relative;
   height: 100vh;
@@ -222,86 +222,7 @@ nav {
   50%       { transform: translateX(-50%) translateY(9px); opacity: 0.6; }
 }
 
-/* ── INGREDIENTS SCROLL CONTAINER ── */
-/* The extra height is the "scroll room" that drives the two-phase
-   date transition in script.js while #ingredients stays pinned. */
-#ingredients-scroll-container {
-  position: relative;
-  height: 300vh;
-}
-
-/* ── INGREDIENTS ── */
-#ingredients {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: radial-gradient(
-    ellipse at 0% 50%,
-    var(--espresso)   0%,
-    var(--dark-brown) 40%,
-    var(--deep-black) 80%
-  );
-}
-
-.ing-rays {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    conic-gradient(
-      from 205deg at -8% -8%,
-      transparent            0deg,
-      rgba(238,165,61,0.10)  10deg,
-      rgba(253,213,105,0.06) 16deg,
-      transparent            25deg,
-      rgba(238,165,61,0.06)  38deg,
-      rgba(253,213,105,0.03) 44deg,
-      transparent            58deg
-    ),
-    radial-gradient(ellipse at -8% 0%, rgba(204,131,43,0.22) 0%, transparent 50%);
-}
-
-.ing-glow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse at 25% 55%, rgba(92,50,9,0.35) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5)  0%, transparent 45%);
-}
-
-#particle-canvas {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.ingredients-inner {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  min-height: 100vh;
-  align-items: center;
-}
-
-/* Date visual (position and opacity are driven by script.js on scroll) */
-.date-visual-wrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  transform: translateX(-110%);
-  opacity: 0;
-  will-change: transform, opacity;
-  /* Short easing smooths the scroll-driven updates from script.js */
-  transition: transform 0.15s linear, opacity 0.15s linear;
-}
-
+/* ── SHARED DATE FRUIT ── */
 .date-fruit {
   position: relative;
   width: clamp(170px, 20vw, 270px);
@@ -385,7 +306,164 @@ nav {
   border-radius: 50%;
 }
 
-/* Ingredient text (fades up during phase 1 of the scroll transition) */
+/* ── SLIDE 2: INGREDIENT TEASER ── */
+#ingredient-teaser {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 0% 50%,
+    var(--dark-amber) 0%,
+    var(--dark-brown) 40%,
+    var(--deep-black) 80%
+  );
+}
+
+.teaser-rays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 205deg at -8% -8%,
+      transparent            0deg,
+      rgba(238,165,61,0.10)  10deg,
+      rgba(253,213,105,0.06) 16deg,
+      transparent            25deg,
+      rgba(238,165,61,0.06)  38deg,
+      rgba(253,213,105,0.03) 44deg,
+      transparent            58deg
+    );
+}
+
+.teaser-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(204,131,43,0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5)    0%, transparent 45%);
+}
+
+/* Date pinned to the left edge, only the right half shows */
+.teaser-date {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: transform 0.15s linear, opacity 0.15s linear;
+}
+
+.teaser-date .date-fruit {
+  width: clamp(220px, 26vw, 360px);
+  height: clamp(300px, 36vw, 480px);
+}
+
+.teaser-text {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  padding: 0 8vw 0 2rem;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(32px);
+  will-change: transform, opacity;
+  transition: transform 0.15s linear, opacity 0.15s linear;
+}
+
+.teaser-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 60px rgba(204,131,43,0.2);
+}
+
+.teaser-hint {
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(245,240,232,0.4);
+}
+
+/* ── SLIDE 3: INGREDIENTS ── */
+#ingredients {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(
+    ellipse at 0% 50%,
+    var(--espresso)   0%,
+    var(--dark-brown) 40%,
+    var(--deep-black) 80%
+  );
+}
+
+.ing-rays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    conic-gradient(
+      from 205deg at -8% -8%,
+      transparent            0deg,
+      rgba(238,165,61,0.10)  10deg,
+      rgba(253,213,105,0.06) 16deg,
+      transparent            25deg,
+      rgba(238,165,61,0.06)  38deg,
+      rgba(253,213,105,0.03) 44deg,
+      transparent            58deg
+    ),
+    radial-gradient(ellipse at -8% 0%, rgba(204,131,43,0.22) 0%, transparent 50%);
+}
+
+.ing-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 25% 55%, rgba(92,50,9,0.35) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(36,16,1,0.5)  0%, transparent 45%);
+}
+
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ingredients-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+}
+
+/* Date starts half-way left and glides to centre as the slide scrolls in */
+.date-visual-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  transform: translateX(-50%);
+  opacity: 0.5;
+  will-change: transform, opacity;
+  transition: transform 0.15s linear, opacity 0.15s linear;
+}
+
 .ingredient-text {
   padding: 4rem 5rem 4rem 2rem;
   opacity: 0;
@@ -521,12 +599,23 @@ footer {
   .nav-links { gap: 1.2rem; }
   .nav-links a { font-size: 0.62rem; letter-spacing: 0.15em; }
 
+  /* Slide 2 */
+  .teaser-date .date-fruit {
+    width: clamp(160px, 44vw, 220px);
+    height: clamp(220px, 60vw, 300px);
+  }
+  .teaser-text {
+    max-width: none;
+    padding: 0 1.5rem 0 34vw;
+  }
+
+  /* Slide 3 */
   .ingredients-inner { grid-template-columns: 1fr; }
 
-  .date-visual-wrap { padding: 5rem 2rem 1rem; }
+  .date-visual-wrap { padding: 6rem 2rem 2rem; }
 
   .ingredient-text {
-    padding: 1rem 1.5rem 2rem;
+    padding: 2rem 1.5rem 4rem;
     text-align: center;
   }
 
