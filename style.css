@@ -7,6 +7,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #333333;
   background-color: #FDFBF7;
@@ -53,7 +54,7 @@ nav a:hover {
   color: #000000;
 }
 
-/* Slide Setup */
+/* Fullscreen Section Setup */
 .slide {
   position: relative;
   min-height: 100vh;
@@ -64,10 +65,10 @@ nav a:hover {
   padding: 100px 40px 40px;
   text-align: center;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
-/* --- LIGHT BEAM ANIMATIONS --- */
-
+/* Light Beam Keyframes */
 @keyframes flickerFade {
   0% { opacity: 0; }
   10% { opacity: 0.85; }
@@ -79,7 +80,6 @@ nav a:hover {
   100% { opacity: 0; }
 }
 
-/* Base Light Beam Styling */
 .light-beam {
   position: absolute;
   width: 650px;
@@ -89,13 +89,12 @@ nav a:hover {
   opacity: 0;
 }
 
-/* Triggered via JS when section enters viewport */
 .slide.animate .light-beam {
   animation: flickerFade 3.5s ease-out forwards;
 }
 
-/* Slide 1 Light: Top-Right */
-#slide1 .light-beam {
+/* Light Beam Positioning */
+#slide1 .light-beam, #slide3 .light-beam {
   top: -200px;
   right: -100px;
   background: radial-gradient(
@@ -107,7 +106,6 @@ nav a:hover {
   transform: rotate(-15deg);
 }
 
-/* Slide 2 Light: Top-Left */
 #slide2 .light-beam {
   top: -200px;
   left: -100px;
@@ -127,7 +125,6 @@ nav a:hover {
   max-width: 680px;
 }
 
-/* Slide 1 Elements */
 #slide1 h1 {
   font-size: 3.5rem;
   letter-spacing: 4px;
@@ -162,71 +159,34 @@ nav a:hover {
   transform: translateY(6px);
 }
 
-/* Slide 2 Elements */
-#slide2 h2 {
+#slide2 h2, #slide3 h2 {
   font-size: 2.2rem;
   letter-spacing: 2px;
   margin-bottom: 24px;
 }
 
-#slide2 p {
+#slide2 p, #slide3 p {
   font-size: 1.05rem;
   line-height: 1.8;
   color: #4A4A4A;
   text-align: justify;
-  text-justify: inter-word;
 }
 
-/* Slide 3 Light: Top-Right (Alternating) */
-#slide3 .light-beam {
-  top: -200px;
-  right: -100px;
-  background: radial-gradient(
-    ellipse at top right,
-    rgba(255, 230, 160, 0.8) 0%,
-    rgba(255, 195, 90, 0.35) 45%,
-    transparent 70%
-  );
-  transform: rotate(-15deg);
-}
-
-/* Continuous Floating Keyframes */
+/* Floating Animation Keyframes */
 @keyframes floatInAir {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(1.5deg);
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(1.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
 }
 
-/* Initial state for the floating element before section is active */
 #slide3 .floating-element {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
-/* Trigger floating animation when Slide 3 enters the viewport */
 #slide3.animate .floating-element {
   opacity: 1;
   transform: translateY(0px);
-  /* Continuous weightless floating loop after fading in */
   animation: floatInAir 4s ease-in-out infinite 0.6s;
-}
-
-/* Slide 3 Light Beam Positioning */
-#slide3 .light-beam {
-  top: -200px;
-  right: -100px;
-  background: radial-gradient(
-    ellipse at top right,
-    rgba(255, 230, 160, 0.8) 0%,
-    rgba(255, 195, 90, 0.35) 45%,
-    transparent 70%
-  );
-  transform: rotate(-15deg);
 }

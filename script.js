@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
   const slides = document.querySelectorAll('.slide');
 
-  // Set up Intersection Observer to handle light trigger on scroll
+  // Options for the Intersection Observer
   const observerOptions = {
     root: null,
-    threshold: 0.5 // Triggers when 50% of the section is visible
+    threshold: 0.5 // Triggers when 50% of the slide is in view
   };
 
   const slideObserver = new IntersectionObserver((entries) => {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (entry.isIntersecting) {
         // Restart animation on slide entry
         entry.target.classList.remove('animate');
-        void entry.target.offsetWidth; // Force CSS reflow
+        void entry.target.offsetWidth; // Force CSS reflow to re-trigger CSS animations
         entry.target.classList.add('animate');
       }
     });
