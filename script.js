@@ -30,8 +30,9 @@ function easeInOut(t) {
 }
 
 function onScroll() {
-  const rect       = scrollContainer.getBoundingClientRect();
-  const totalScroll = scrollContainer.offsetHeight - window.innerHeight;
+  const rect        = scrollContainer.getBoundingClientRect();
+  // Scroll room = container height minus the pinned section (never 0)
+  const totalScroll = Math.max(scrollContainer.offsetHeight - window.innerHeight, 1);
 
   // progress: 0 when container top hits viewport top, 1 when fully scrolled
   const progress = clamp(-rect.top / totalScroll, 0, 1);
